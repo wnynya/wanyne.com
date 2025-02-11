@@ -1,0 +1,68 @@
+
+wanyne.com
+/
+/login?r=link
+/register
+/reset-password
+
+/terms-of-use
+/privacy-policy
+
+/settings/profile
+/settings/account
+/settings/auth
+/settings/sessions
+/settings/permissions
+/settings/projects
+
+/projects
+/projects/:pid
+/projects/:pid/keys
+/projects/:pid/keys/:kid
+
+/manage/logs
+/manage/accounts/:uid
+/manage/projects/:pid
+
+api.wanyne.com
+/
+[CR__] /accounts
+[_R_D] /accounts/:uid
+[_RU_] /accounts/:uid/profile
+[CRUD] /accounts/:uid/account/phone
+[_RU_] /accounts/:uid/account/emails
+[__U_] /accounts/:uid/auth/password
+[C__D] /accounts/:uid/auth/password/verification
+[CR_D] /accounts/:uid/sessions
+[_R_D] /accounts/:uid/sessions/:sid
+[_RUD] /accounts/:uid/permissions
+[_RUD] /accounts/:uid/projects
+
+[C___] /accounts/:uid/message/email
+[C___] /accounts/:uid/message/phone
+[C___] /accounts/:uid/message/notification
+
+[CR__] /projects
+[_RUD] /projects/:pid
+[CR__] /projects/:pid/keys
+[_RUD] /projects/:pid/keys/:kid
+[_RUD] /projects/:pid/keys/:kid/permissions
+[_R__] /projects/:pid/keys/:kid/usage
+
+/network
+/photo
+/weather
+/translation
+/amethy
+
+amuject.com
+/
+/:name
+/:name/logs
+
+amethy.amuject.com
+/
+/tunnel
+/tunnel/servers
+/tunnel/servers/:tid
+/items

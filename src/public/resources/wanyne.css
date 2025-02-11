@@ -1,0 +1,264 @@
+/* 
+  SuisseIntl
+  https://www.swisstypefaces.com/fonts/suisse/
+*/
+@import url('/resources/fonts/SuisseIntl/sussieintl.css');
+@import url('/resources/fonts/SuisseIntl/suisseintl-mono.css');
+
+/* 
+  Pretendard
+  https://github.com/orioncactus/pretendard
+*/
+@import url('/resources/fonts/pretendard/pretendard-kr.css');
+@import url('/resources/fonts/pretendard/pretendard-jp.css');
+
+:root {
+  --white: rgb(255, 255, 255);
+  --light1: rgb(245, 245, 245);
+  --light2: rgb(238, 238, 238);
+  --light3: rgb(230, 230, 230);
+  --light4: rgb(210, 210, 210);
+  --gray1: rgb(180, 180, 180);
+  --gray2: rgb(150, 150, 150);
+  --gray3: rgb(120, 120, 120);
+  --gray4: rgb(80, 80, 80);
+  --dark1: rgb(60, 60, 60);
+  --dark2: rgb(40, 40, 40);
+  --dark3: rgb(20, 20, 20);
+  --black: rgb(0, 0, 0);
+
+  --red: rgb(255, 59, 48);
+  --orange: rgb(255, 149, 0);
+  --yellow: rgb(255, 204, 0);
+  --green: rgb(40, 205, 64);
+  --blue: rgb(0, 122, 255);
+  --purple: rgb(175, 82, 222);
+  --pink: rgb(255, 45, 85);
+
+  --emoji: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji',
+    'Android Emoji';
+  --sans-serif: 'SuisseIntl', 'Pretendard-KR', 'Pretendard-JP', var(--emoji),
+    sans-serif;
+  --monospace: 'SuisseIntl-Mono', 'SF Mono', 'Consolas', 'Pretendard-KR',
+    'Pretendard-JP', var(--emoji), monospace;
+  --font-family: var(--sans-serif);
+}
+
+[theme='dark'] {
+  --red: rgb(255, 69, 58);
+}
+
+[text='latin'],
+[text='number'] {
+  font-family: 'SuisseIntl', sans-serif;
+  font-size: 1em;
+  vertical-align: baseline;
+  position: relative;
+  bottom: -0.05em;
+}
+[text='hangul'],
+[text='braket'] {
+  font-family: 'OnulSusa60', sans-serif;
+  font-size: 0.92em;
+  vertical-align: baseline;
+  position: relative;
+  bottom: 0.05em;
+}
+[text='hanja'],
+[text='gana'] {
+  font-family: 'Pretendard-JP', sans-serif;
+  font-size: 0.92em;
+  vertical-align: baseline;
+  position: relative;
+  bottom: -0.02em;
+}
+[text='others'] {
+  font-family: var(--sans-serif);
+  font-size: 1em;
+  vertical-align: baseline;
+  position: relative;
+  bottom: -0.05em;
+}
+
+p {
+  font-size: 12pt;
+  line-height: 150%;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+  vertical-align: baseline;
+}
+
+html {
+  font-size: calc(15px + (100vw - 900px) / 400);
+  font-size: 15px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  color: var(--dark1);
+  background: var(--light1);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+  margin: 0;
+}
+
+p > a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+button,
+[type='button'] {
+  --button-bg: var(--light1);
+  --button-fg: var(--dark1);
+  --button-ol: var(--gray1);
+
+  --button-selected-bg: var(--gray3);
+  --button-selected-fg: var(--black);
+  --button-selected-ol: var(--gray6);
+
+  --button-hover-bg: var(--light3);
+  --button-hover-fg: var(--black);
+  --button-hover-ol: var(--gray6);
+
+  --button-disabled-bg: rgb(128, 128, 128);
+  --button-disabled-fg: white;
+  --button-disabled-ol: rgb(180, 180, 180);
+
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+  border-radius: 0.625rem;
+  height: 2.25rem;
+  padding: 0 1rem;
+  cursor: pointer;
+  font-family: var(--sans-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+  background: var(--button-bg);
+  color: var(--button-fg);
+  border: solid 1px var(--button-ol);
+  transition: background ease-out 0.1s, border-color ease-out 0.1s;
+}
+button[selected],
+[type='button'][selected] {
+  background: var(--button-selected-bg);
+  color: var(--button-selected-fg);
+  border-color: var(--button-selected-ol);
+}
+button:hover,
+[type='button']:hover {
+  background: var(--button-hover-bg);
+  color: var(--button-hover-fg);
+  border-color: var(--button-hover-ol);
+}
+
+button:disabled,
+button[disabled],
+[type='button']:disabled,
+[type='button'][disabled] {
+  background: var(--button-disabled-bg);
+  color: var(--button-disabled-fg);
+  border-color: var(--button-disabled-ol);
+  cursor: not-allowed;
+}
+button:focus-visible,
+[type='button']:focus-visible {
+  outline: solid 0.25rem var(--th);
+  outline-offset: 0.25rem;
+}
+
+button > .material-symbols-outlined,
+[type='button'] > .material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 17;
+  font-size: 16pt;
+  margin-right: 0.25rem;
+  margin-left: -0.5rem;
+}
+
+/* 다른 스타일의 버튼 */
+
+button[small],
+[type='button'][small] {
+  height: 2rem;
+  border-radius: 0.625rem;
+  font-size: 0.8rem;
+  padding: 0 0.75rem;
+  gap: 0.25rem;
+}
+button[shadow],
+[type='button'][shadow] {
+  box-shadow: var(--button-shadow);
+}
+
+/* 다른 타입의 버튼 */
+
+button[primary],
+[type='button'][primary] {
+  --button-bg: rgb(30, 30, 30);
+  --button-ol: rgb(10, 10, 10);
+  --button-fg: rgb(230, 230, 230);
+  --button-hover-bg: rgb(60, 60, 60);
+  --button-hover-fg: white;
+  --button-hover-ol: rgb(80, 80, 80);
+  --button-disabled-bg: rgb(150, 87, 72);
+  --button-disabled-fg: white;
+  --button-disabled-ol: rgb(111, 65, 54);
+}
+button[danger],
+[type='button'][danger] {
+  --button-bg: var(--light1);
+  --button-fg: var(--red);
+  --button-ol: var(--red);
+
+  --button-selected-bg: var(--light4);
+  --button-selected-fg: var(--black);
+  --button-selected-ol: var(--light4);
+
+  --button-hover-bg: var(--red);
+  --button-hover-fg: var(--light1);
+  --button-hover-ol: var(--red);
+}
+button[invisible],
+[type='button'][invisible] {
+  --button-bg: transparent;
+  --button-fg: var(--dark1);
+  --button-ol: transparent;
+
+  --button-selected-bg: var(--light4);
+  --button-selected-fg: var(--black);
+  --button-selected-ol: var(--light4);
+
+  --button-hover-bg: var(--light3);
+  --button-hover-fg: var(--black);
+  --button-hover-ol: var(--light3);
+}
+
+/* 저장하기 */
+.save-btn {
+  background-color: #ff643c;
+  width: 160px; /* 1.5rem */
+  height: 48px; /* 0.5rem */
+  border-radius: 10px 0 0 10px;
+  font-size: 20px; /* 0.2rem */
+  cursor: pointer;
+  position: absolute;
+  right: 0px; /* 오른쪽 아래에 고정 */
+  bottom: 100px; /* 아래쪽 하단에 고정 */
+}

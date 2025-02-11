@@ -1,0 +1,25 @@
+{
+  "name": "wanyne.com",
+  "version": "1.0.0",
+  "main": "src/app.mjs",
+  "scripts": {
+    "start": "node src/app.mjs -p 80",
+    "dev": "nodemon src/app.mjs -p 80"
+  },
+  "author": "Wany (Sungwan Jo)",
+  "license": "",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.2",
+    "node-html-parser": "^7.0.1"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "*"
+    ],
+    "ignore": [
+      "./src/public"
+    ],
+    "ext": "js,mjs,json,html,css"
+  }
+}
