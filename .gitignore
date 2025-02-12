@@ -2,4 +2,7 @@
 .vscode/
 node_modules/
 .env
+
+/secrets
 /config
+/src/public/resources/fonts
