@@ -18,7 +18,7 @@
 :root {
   --emoji: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji',
     'Android Emoji';
-  --sans-serif: 'SuisseIntl', 'Suse60', 'Pretendard', 'Pretendard-JP',
+  --sans-serif: 'SuisseIntl', 'Susa60', 'Pretendard', 'Pretendard-JP',
     var(--emoji), sans-serif;
   --monospace: 'SuisseIntl-Mono', 'SF Mono', 'Consolas', 'Pretendard',
     'Pretendard-JP', var(--emoji), monospace;
