@@ -1,0 +1,64 @@
+#auth-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 8rem);
+  overflow: hidden;
+  position: relative;
+}
+
+#auth-login .wrapper {
+  box-sizing: content-box;
+  width: 36rem;
+  height: 36rem;
+  position: absolute;
+  perspective: 100vw;
+  perspective-origin: center;
+}
+#auth-login .side {
+  background: var(--white);
+  padding: 6rem;
+  border-radius: 6.625rem;
+  transform-style: preserve-3d;
+}
+#auth-login .side.front {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#auth-login .side.back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotateX(-180deg);
+  opacity: 0;
+  pointer-events: none;
+}
+#auth-login .wrapper[shake] {
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+}
+#auth-login .wrapper[goaway] {
+  transition: transform 0.5s ease-out !important;
+  transform: rotate(720deg) scale(0) !important;
+}
+#auth-login h1 {
+  text-align: center;
+}
+#auth-login .form {
+  position: relative;
+}
+#button-auth-login {
+  width: 100%;
+}
+#button-auth-reset-password {
+  position: absolute;
+  right: -1rem;
+  transform: rotate(-15deg);
+  transition: right 0.5s ease-out, transform 0.5s ease-out;
+  z-index: 30000;
+}
+#button-auth-reset-password[hide] {
+  right: -100vw;
+  transform: rotate(2000deg);
+}

@@ -17,7 +17,7 @@ export default customElements.define(
         }
         :host {
           display: flex;
-          flex-direction: column;=
+          flex-direction: column;
         }
         :host > input {
           font-size: 1rem;
@@ -26,12 +26,12 @@ export default customElements.define(
           height: 2.25rem;
           padding: 0rem 0.75rem;
           outline: none;
-          border: solid 1px rgb(210, 210, 210);
+          border: solid 0.1rem var(--light4);
           border-radius: 0.625rem;
-          background: rgb(240, 240, 240);
+          background: var(--light2);
         }
         :host > input:focus {
-          border-color: rgb(80, 80, 80);
+          border-color: var(--black);
         }
         :host > input::placeholder,
         :host > input::-webkit-input-placeholder {
@@ -52,8 +52,8 @@ export default customElements.define(
         :host > label {
           line-height: 1.25rem;
           font-size: 0.8rem;
-          font-weight: 600;
-          color: rgb(80, 80, 80);
+          font-weight: 500;
+          color: var(--dark1);
         }
         :host > .message {
           line-height: 1rem;
@@ -92,6 +92,8 @@ export default customElements.define(
       shadow.appendChild(label);
       shadow.appendChild(input);
       shadow.appendChild(message);
+
+      window.mixedtypo(shadow);
     }
 
     disconnectedCallback() {}

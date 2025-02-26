@@ -1,0 +1,63 @@
+/* 
+
+  타이포그라피 
+
+*/
+
+/* SuisseIntl https://www.swisstypefaces.com/fonts/suisse/ */
+@import url('/resources/fonts/SuisseIntl/SuisseIntl.css');
+@import url('/resources/fonts/SuisseIntl/SuisseIntlMono.css');
+/* OnulSuse60 (Susa60) https://onulfont.com/shop/font_item.php?it_id=1717501729 */
+@import url('/resources/fonts/OnulSusa60/OnulSusa60.css');
+/* Pretendard https://github.com/orioncactus/pretendard */
+@import url('/resources/fonts/Pretendard/Pretendard.css');
+@import url('/resources/fonts/Pretendard/PretendardJP.css');
+
+:root {
+  --emoji: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji',
+    'Android Emoji';
+  --sans-serif: 'SuisseIntl', 'Susa60', 'Pretendard', 'Pretendard-JP',
+    var(--emoji), sans-serif;
+  --monospace: 'SuisseIntl-Mono', 'SF Mono', 'Consolas', 'Pretendard',
+    'Pretendard-JP', var(--emoji), monospace;
+  --font-family: var(--sans-serif);
+  --font-family-input: var(--monospace);
+}
+[text='latin'],
+[text='number'] {
+  font-family: 'SuisseIntl', sans-serif;
+  font-size: 1em;
+  vertical-align: baseline;
+  position: relative;
+  bottom: -0.05em;
+}
+[text='hangul'],
+[text='braket'] {
+  font-family: 'Susa60-Variable', sans-serif;
+  font-size: 0.92em;
+  vertical-align: baseline;
+  position: relative;
+  bottom: 0.05em;
+}
+[text='hanja'],
+[text='gana'] {
+  font-family: 'Pretendard-JP', sans-serif;
+  font-size: 0.92em;
+  vertical-align: baseline;
+  position: relative;
+  bottom: -0.02em;
+}
+[text='others'] {
+  font-family: var(--sans-serif);
+  font-size: 1em;
+  vertical-align: baseline;
+  position: relative;
+  bottom: -0.05em;
+}
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 410, 'GRAD' 0, 'opsz' 24;
+  font-size: 1em;
+  vertical-align: baseline;
+  position: relative;
+  bottom: -0.18em;
+}

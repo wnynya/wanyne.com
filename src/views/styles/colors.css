@@ -1,0 +1,35 @@
+/*
+
+  색
+
+*/
+
+:root {
+  --white: rgb(255, 255, 255);
+  --light1: rgb(245, 245, 245);
+  --light2: rgb(238, 238, 238);
+  --light3: rgb(230, 230, 230);
+  --light4: rgb(220, 220, 220);
+  --light5: rgb(210, 210, 210);
+  --gray1: rgb(180, 180, 180);
+  --gray2: rgb(150, 150, 150);
+  --gray3: rgb(120, 120, 120);
+  --gray4: rgb(80, 80, 80);
+  --dark1: rgb(60, 60, 60);
+  --dark2: rgb(40, 40, 40);
+  --dark3: rgb(30, 30, 30);
+  --black: rgb(0, 0, 0);
+
+  --red-light: rgb(255, 236, 235);
+  --red: rgb(255, 59, 48);
+
+  --orange: rgb(255, 149, 0);
+  --yellow: rgb(255, 204, 0);
+  --green: rgb(40, 205, 64);
+  --blue: rgb(0, 122, 255);
+  --purple: rgb(175, 82, 222);
+  --pink: rgb(255, 45, 85);
+}
+[theme='dark'] {
+  --red: rgb(255, 69, 58);
+}

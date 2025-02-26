@@ -1,0 +1,173 @@
+/*
+
+  사용자 입력
+
+*/
+
+label {
+  display: block;
+  height: 1.5rem;
+  line-height: 100%;
+  padding-top: 0.2rem;
+  padding-bottom: 0.45rem;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--gray4);
+}
+
+/* 버튼 */
+button,
+[type='button'] {
+  --button-bg: var(--light2);
+  --button-fg: var(--dark3);
+  --button-ol: var(--light5);
+
+  --button-hover-bg: var(--light4);
+  --button-hover-fg: var(--black);
+  --button-hover-ol: var(--black);
+
+  --button-selected-bg: var(--gray3);
+  --button-selected-fg: var(--black);
+  --button-selected-ol: var(--gray6);
+
+  --button-disabled-bg: rgb(128, 128, 128);
+  --button-disabled-fg: white;
+  --button-disabled-ol: rgb(180, 180, 180);
+
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+  border-radius: 0.625rem;
+  height: 2.25rem;
+  padding: 0 1rem;
+  cursor: pointer;
+  font-family: var(--sans-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+  background: var(--button-bg);
+  color: var(--button-fg);
+  border: solid 0.1rem var(--button-ol);
+  transition: background ease-out 0.1s, border-color ease-out 0.1s;
+  line-height: 2.05rem;
+  transform: translateX(0);
+}
+button[selected],
+[type='button'][selected] {
+  background: var(--button-selected-bg);
+  color: var(--button-selected-fg);
+  border-color: var(--button-selected-ol);
+}
+button:hover,
+[type='button']:hover {
+  background: var(--button-hover-bg);
+  color: var(--button-hover-fg);
+  border-color: var(--button-hover-ol);
+}
+button:disabled,
+button[disabled],
+[type='button']:disabled,
+[type='button'][disabled] {
+  background: var(--button-disabled-bg);
+  color: var(--button-disabled-fg);
+  border-color: var(--button-disabled-ol);
+  cursor: not-allowed;
+}
+button:focus-visible,
+[type='button']:focus-visible {
+  outline: solid 0.25rem var(--th);
+  outline-offset: 0.25rem;
+}
+/* 다른 타입의 버튼 */
+button[primary],
+[type='button'][primary] {
+  --button-bg: var(--dark3);
+  --button-fg: var(--light1);
+  --button-ol: var(--black);
+
+  --button-hover-bg: var(--dark1);
+  --button-hover-fg: var(--white);
+  --button-hover-ol: var(--dark3);
+}
+button[danger],
+[type='button'][danger] {
+  --button-bg: var(--red-light);
+  --button-fg: var(--red);
+  --button-ol: var(--red);
+
+  --button-hover-bg: var(--red);
+  --button-hover-fg: var(--light1);
+  --button-hover-ol: var(--red);
+}
+button[invisible],
+[type='button'][invisible] {
+  --button-bg: transparent;
+  --button-fg: var(--dark1);
+  --button-ol: transparent;
+
+  --button-hover-bg: var(--light3);
+  --button-hover-fg: var(--black);
+  --button-hover-ol: var(--light3);
+
+  --button-selected-bg: var(--light4);
+  --button-selected-fg: var(--black);
+  --button-selected-ol: var(--light4);
+}
+
+/* 인풋 */
+input[type='text'],
+input[type='password'] {
+  font-family: var(--font-family-input);
+  font-size: 1rem;
+  font-weight: 400;
+  width: 100%;
+  height: 2.25rem;
+  padding: 0 1rem;
+  outline: none;
+  border: solid 0.1rem var(--light5);
+  border-radius: 0.625rem;
+  color: var(--dark1);
+  background: var(--light2);
+  transition: border-color 0.2s ease-out;
+}
+input[type='text']:focus,
+input[type='password']:focus {
+  border-color: var(--black);
+}
+input[type='text']::placeholder,
+input[type='text']::-webkit-input-placeholder,
+input[type='password']::placeholder,
+input[type='password']::-webkit-input-placeholder {
+  color: var(--gray1);
+}
+input[type='text']:disabled,
+input[type='password']:disabled {
+  color: var(--dark1);
+  background: var(--gray1);
+  border-color: var(--gray2);
+}
+input[type='text']:disabled::placeholder,
+input[type='text']:disabled::-webkit-input-placeholder,
+input[type='password']:disabled::placeholder,
+input[type='password']:disabled::-webkit-input-placeholder {
+  color: var(--gray3);
+}
+input[type='text']:read-only:focus,
+input[type='password']:read-only:focus {
+  border-color: var(--light4);
+}
+input[type='text']:-webkit-autofill,
+input[type='text']:-webkit-autofill:hover,
+input[type='text']:-webkit-autofill:focus,
+input[type='text']:-webkit-autofill:active,
+input[type='password']:-webkit-autofill,
+input[type='password']:-webkit-autofill:hover,
+input[type='password']:-webkit-autofill:focus,
+input[type='password']:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: var(--dark1);
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 20px 20px var(--light2);
+}

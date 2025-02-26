@@ -43,7 +43,9 @@ class TemplateEngine {
       });
     };
 
-    try {
+    next();
+
+    /*try {
       const file = path.resolve(this.views, req.path.substring(1));
 
       if (!file.startsWith(this.views)) {
@@ -57,7 +59,7 @@ class TemplateEngine {
       res.sendFile(file);
     } catch (e) {
       next();
-    }
+    }*/
   }
 
   getTemplate(file) {
@@ -93,7 +95,7 @@ class TemplateEngine {
     let elements = document.querySelectorAll('import');
     for (const element of elements) {
       let src = element.getAttribute('src');
-      if (!src.endsWith('.html')) {
+      if (!/\.[^\.]+/.test(src)) {
         src += '.html';
       }
       let dir = path.dirname(file);
@@ -102,8 +104,24 @@ class TemplateEngine {
         src = src.substring(1);
       }
       const importFile = path.resolve(dir, src);
-      const importDocument = HTML.parse(this.getTemplate(importFile));
+      const ext = importFile.match(/\.([^\.]+)$/)[1];
+      const data = this.getTemplate(importFile);
+      let importDocument;
+      if (['html', 'htm', 'svg'].includes(ext)) {
+        importDocument = HTML.parse(data);
+      } else if (['js', 'mjs'].includes(ext)) {
+        importDocument = HTML.parse(`<script>${data}</script>`);
+      } else if (['css'].includes(ext)) {
+        importDocument = HTML.parse(`<style>${data}</style>`);
+      }
       this.processDocument(importFile, importDocument, scope);
+      if (importDocument.childNodes.length === 1) {
+        const attrs = element.attributes;
+        delete attrs.src;
+        for (const key of Object.keys(attrs)) {
+          importDocument.childNodes[0].setAttribute(key, attrs[key]);
+        }
+      }
       element.replaceWith(...importDocument.childNodes);
     }
   }

@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * modules/animate.js
+ * modules/transform.js
  *
  * CSS 대신 JS 로 만든 transform 애니메이션
  * (띠용 하기 위해 사용)
@@ -11,7 +11,7 @@
 
 const animatings = {};
 
-class Animate {
+class Transform {
   constructor(element) {
     this.id = Date.now();
     this.element = element;
@@ -54,7 +54,7 @@ class Animate {
       const transforms = {};
       const transformsFrom = {};
       for (const key in styles) {
-        if (typeof styles[key] == 'number') {
+        if (typeof styles[key] === 'number') {
           styles[key] = styles[key] + 'px';
         }
 
@@ -117,7 +117,7 @@ class Animate {
             if (types[key] == 'px') {
               target = parseFloat(styles[key].replace('px', ''), 10);
             } else if (types[key] == 'rem') {
-              target = Animate.#rem(
+              target = Transform.#rem(
                 parseFloat(styles[key].replace('rem', ''), 10)
               );
             }
@@ -143,6 +143,9 @@ class Animate {
           update(1);
           element.removeAttribute('animate');
           delete animatings[id];
+          for (const key in styles) {
+            element.style[key] = styles[key];
+          }
           return;
         }
         update(t);
@@ -526,8 +529,8 @@ class Animate {
   }
 }
 
-window.HTMLElement.prototype.Animate = function () {
-  return new Animate(this);
+window.HTMLElement.prototype.transform = function () {
+  return new Transform(this);
 };
 
-export default Animate;
+export default Transform;

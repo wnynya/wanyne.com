@@ -1,0 +1,43 @@
+<import src="login.css"></import>
+<import src="login.js" type="module"></import>
+
+<section id="auth-login">
+  <div class="wrapper" flip="front">
+    <form class="side front" layer onsubmit="return false;">
+      <h1>로그인 🔐</h1>
+      <div class="form">
+        <label>사용자 이름</label>
+        <input
+          id="input-auth-login-username"
+          type="text"
+          spellcheck="false"
+          autocomplete="username"
+          required
+        />
+        <br />
+        <br />
+        <label>비밀번호</label>
+        <input
+          id="input-auth-login-password"
+          type="password"
+          spellcheck="false"
+          autocomplete="current-password"
+          required
+        />
+        <a
+          type="button"
+          href="/u/reset-password"
+          id="button-auth-reset-password"
+          primary
+          hide
+        >
+          🤯 비밀번호를 모르겠어! 💥
+        </a>
+      </div>
+      <button id="button-auth-login" primary>로그인</button>
+    </form>
+    <div class="side back" layer>
+      <h1>로그인 중⏳...</h1>
+    </div>
+  </div>
+</section>

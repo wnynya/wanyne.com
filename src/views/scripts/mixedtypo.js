@@ -1,20 +1,33 @@
-function doom(element) {
+window.mixedtypo = (element) => {
   const textNodes = [];
   function findTextNodes(parent) {
     for (const node of parent.childNodes) {
       if (node.nodeName === '#text') {
         textNodes.push(node);
-      } else if (!['SCRIPT'].includes(node.nodeName)) {
+      } else if (
+        !['HEAD', 'SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT'].includes(
+          node.nodeName
+        ) &&
+        !node.hasAttribute('text') &&
+        !node.classList.contains('material-symbols-outlined')
+      ) {
         findTextNodes(node);
       }
     }
   }
   findTextNodes(element);
 
+  function replaceNode(node, buffer, type) {
+    const span = document.createElement('span');
+    span.setAttribute('text', type);
+    span.innerText = buffer;
+    node.parentNode.insertBefore(span, node);
+  }
+
   for (const node of textNodes) {
     let value = node.nodeValue;
     value = value.replace(/\r|\n/g, '');
-    if (!value) {
+    if (!value.replace(/ /g, '')) {
       continue;
     }
 
@@ -24,19 +37,17 @@ function doom(element) {
       const char = value.charAt(i);
       const type = getType(char);
       if (bufferType && bufferType != type) {
-        const span = document.createElement('span');
-        span.setAttribute('text', bufferType);
-        span.innerText = buffer;
-        node.parentNode.insertBefore(span, node);
+        replaceNode(node, buffer, bufferType);
         buffer = char;
       } else {
         buffer += char;
       }
       bufferType = type;
     }
+    replaceNode(node, buffer, bufferType);
     node.parentNode.removeChild(node);
   }
-}
+};
 
 const typeMatchers = {
   latin: /[A-Za-zÀ-ÖØ-žſ-ʯЀ-ԯ]/,
@@ -56,4 +67,4 @@ function getType(char) {
   return 'others';
 }
 
-window.addEventListener('load', doom(document.body));
+mixedtypo(document.body);
