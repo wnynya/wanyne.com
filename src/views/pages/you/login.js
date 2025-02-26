@@ -1,5 +1,3 @@
-import { APIPostRequest } from '/resources/modules/request.js';
-
 const element = {
   form: document.querySelector('#auth-login > .wrapper'),
   front: document.querySelector('#auth-login > .wrapper > .front'),
@@ -56,6 +54,7 @@ async function login() {
     window.location.href = redir ? redir : '/';
   }, 1000);
 }
+login();
 
 async function task() {
   throw 'a';

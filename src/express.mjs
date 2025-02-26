@@ -37,7 +37,7 @@ app.use('/', router);
 
 /* 404 처리 */
 app.all('*', (req, res) => {
-  res.status(404).page('error/404', '404');
+  res.error404();
 });
 
 export default app;

@@ -44,7 +44,7 @@ const Lapisly = new (class {
     });
   }
 
-  goto(url, effect, pushHistory = true, target = '_blank') {
+  goto(url, effect, pushHistory = true, target) {
     const _this = this;
 
     if (url.startsWith('/')) {
@@ -53,8 +53,8 @@ const Lapisly = new (class {
 
     const matches = url.match(/https?:\/?\/?([^/]+)(\/[^?]*)?(\?.+)?/);
     let host = matches[1];
-    if (host !== window.location.host) {
-      window.open(url, target);
+    if (host !== window.location.host || target === '_blank') {
+      window.open(url, target || '_blank');
       return;
     }
 
@@ -67,8 +67,19 @@ const Lapisly = new (class {
     }
 
     window.asyncs ? window.asyncs.clear() : null;
+    window.Nav ? window.Nav.closeDropdown() : null;
 
-    this.get(url).then(go).catch(go);
+    let effector = new Curtain();
+    let result = null;
+    let shaded = false;
+    setTimeout(() => {
+      shaded = true;
+      if (result) {
+        go(result);
+      }
+    }, effector.timeblock * effector.div + 200);
+
+    this.get(url).then(after).catch(after);
 
     function go(res) {
       if (res.url !== url) {
@@ -77,60 +88,14 @@ const Lapisly = new (class {
       }
       _this.display(res.body);
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      effector.end();
     }
-    /*
-    if (effect == 'bar') {
-      let effector = new Loadingbar();
-      function go(res) {
-        if (res.uri != href) {
-          tempHistory.push(res.uri);
-          window.history.replaceState(
-            tempHistory,
-            window.location.host,
-            res.uri
-          );
-        }
-        _this.display(res.body);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        effector.end();
-        window.Cursor ? window.Cursor.lapisGoto() : null;
-        window.Inputs ? window.Inputs.lapisGoto() : null;
+    function after(res) {
+      result = res;
+      if (shaded) {
+        go(result);
       }
-      GetRequest(href).then(go).catch(go);
-    } else if (effect == 'curtain') {
-      let effector = new Curtain();
-      let result = null;
-      let shaded = false;
-      function go(res) {
-        if (res.uri != href) {
-          tempHistory.push(res.uri);
-          window.history.replaceState(
-            tempHistory,
-            window.location.host,
-            res.uri
-          );
-        }
-        _this.display(res.body);
-        window.scrollTo({ top: 0 /*behavior: 'smooth'* });
-        effector.end();
-        window.Cursor ? window.Cursor.lapisGoto() : null;
-        window.Inputs ? window.Inputs.lapisGoto() : null;
-      }
-      setTimeout(() => {
-        shaded = true;
-        if (result) {
-          go(result);
-        }
-      }, effector.timeblock * effector.div + 200);
-      function after(res) {
-        result = res;
-        if (shaded) {
-          go(result);
-        }
-      }
-      GetRequest(href).then(after).catch(after);
     }
-    */
   }
 
   async get(url) {
@@ -166,16 +131,6 @@ const Lapisly = new (class {
 
     // head
     copyHTML(doc, document, 'title');
-    copyHTML(doc, document, 'style#theme');
-    copyContent(doc, document, 'meta[name="description"]');
-    copyHTML(doc, document, 'script[type="application/ld+json"]');
-    copyContent(doc, document, 'link[rel=canonical]');
-    copyContent(doc, document, 'meta[name="og:title"]');
-    copyContent(doc, document, 'meta[name="og:description"]');
-    copyContent(doc, document, 'meta[name="og:image"]');
-    copyContent(doc, document, 'meta[name="twitter:title"]');
-    copyContent(doc, document, 'meta[name="twitter:description"]');
-    copyContent(doc, document, 'meta[name="twitter:image"]');
 
     // body
     copyHTML(doc, document, 'lapisly');
@@ -327,7 +282,7 @@ class Curtain {
       bar.style.right = i * this.block - 2 + 'px';
       bar.style.height = '100%';
       bar.style.width = '0px';
-      bar.style.background = 'var(--fg)';
+      bar.style.background = 'var(--th)';
       bar.style.transition = 'width 0.2s ease-out, background 0.5s ease-out';
       this.curtain.appendChild(bar);
     }

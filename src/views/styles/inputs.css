@@ -62,6 +62,7 @@ button[selected],
 }
 button:hover,
 [type='button']:hover {
+  text-decoration: none !important;
   background: var(--button-hover-bg);
   color: var(--button-hover-fg);
   border-color: var(--button-hover-ol);

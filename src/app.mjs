@@ -17,4 +17,5 @@ for (let i = 0; i < process.argv.length; i++) {
 
 http.createServer(express).listen(port, () => {
   console.log(`Server start on port ${port}`);
+  http.request(new URL(`http://localhost:${port}`)).end();
 });

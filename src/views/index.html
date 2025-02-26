@@ -26,6 +26,36 @@
     />
 
     <title>#{title}</title>
+
+    <if condition="meta.desc">
+      <meta name="description" content="#{meta.desc || ''}" />
+    </if>
+    <if condition="meta.keywords">
+      <meta name="keywords" content="#{meta.keywords || ''}" />
+    </if>
+    <if condition="meta.author">
+      <meta name="author" content="#{meta.author || ''}" />
+    </if>
+
+    <!-- OpenGraph -->
+    <meta name="og:type" content="website" />
+    <meta name="og:locale" content="ko_KR" />
+    <meta name="og:site_name" content="#{meta.og.sitename}" />
+    <meta name="og:title" content="#{meta.og.title}" />
+    <if condition="meta.og.desc">
+      <meta name="og:description" content="#{meta.og.desc}" />
+    </if>
+    <if condition="meta.og.image">
+      <meta name="og:image" content="#{meta.og.image}" />
+      <meta name="og:image:width" content="1200" />
+      <meta name="og:image:height" content="630" />
+    </if>
+
+    <if condition="meta.jsonld">
+      <script type="application/ld+json">
+        #{meta.jsonld}
+      </script>
+    </if>
   </head>
   <body>
     <import src="index.css"></import>
@@ -70,6 +100,66 @@
       <import src="pages/#{page}"></import>
     </lapisly>
 
-    <footer id="footer"></footer>
+    <footer id="footer">
+      <div class="blocks d4">
+        <div class="b1">
+          <p><a href="https://wanyne.com">와니네</a></p>
+          <br />
+        </div>
+        <div class="b2"></div>
+        <div class="b3">
+          <p>© 2017 — 2025</p>
+          <br />
+        </div>
+        <div class="b4">
+          <p>와니</p>
+          <br />
+          <p><a tooltip="✉️" href="mailto:sung@wanyne.com"> 이메일 </a></p>
+          <p>
+            <a tooltip="💻" href="https://github.com/wnynya" target="_blank">
+              깃허브
+            </a>
+          </p>
+        </div>
+      </div>
+      <br />
+      <div class="blocks d2">
+        <div class="b1">
+          <p><a href="/terms-of-use" target="_blank"> 이용약관 </a></p>
+          <p>
+            <a href="/privacy-policy" target="_blank"> 개인정보처리방침 </a>
+          </p>
+        </div>
+        <div class="b2">
+          <br />
+          <p>이 웹사이트는 영원히 개발 중입니다.</p>
+        </div>
+      </div>
+      <br />
+      <hr />
+      <br />
+      <p>배너들</p>
+      <br />
+      <div class="banners">
+        <a href="https://wanyne.com" target="_blank" rel="nofollow">
+          <img src="/resources/banners/wanyne-banner.gif" />
+        </a>
+        <a href="https://amuject.com" target="_blank" rel="nofollow">
+          <img src="/resources/banners/amuject-banner.gif" />
+        </a>
+        <a>
+          <img src="/resources/banners/csf-banner.gif" />
+        </a>
+        <a href="http://u-miniple.com/" target="_blank" rel="nofollow">
+          <img
+            src="https://blog.kakaocdn.net/dn/d0MYPA/btsIbuLPkFm/Mw0Z2Xpyf5SzQGZeXDi8h0/img.gif"
+            alt="미니플동맹 배너"
+          />
+        </a>
+        <a>
+          <img src="/resources/banners/csf-banner.gif" />
+        </a>
+      </div>
+    </footer>
   </body>
 </html>

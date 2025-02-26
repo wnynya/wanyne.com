@@ -1,2 +1,10 @@
 #error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 8rem);
+  overflow: hidden;
+  position: relative;
+  font-size: 1rem;
+  line-height: 100%;
 }

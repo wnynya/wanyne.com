@@ -103,7 +103,7 @@
   width: 100%;
   height: 0rem;
   padding: 0 2rem;
-  background: #d2b0dd;
+  background: var(--th);
   border-bottom-left-radius: 2rem;
   border-bottom-right-radius: 2rem;
   z-index: 50000;
@@ -172,9 +172,48 @@
 */
 
 #footer {
+  margin-top: -2rem;
   width: 100%;
-  height: 12rem;
-  background: #d2b0dd;
+  background: var(--th);
   border-top-left-radius: 2rem;
   border-top-right-radius: 2rem;
+  padding: 2rem;
+  line-height: 100%;
+  font-size: 1rem;
+}
+#footer hr {
+  border-color: var(--dark1);
+  margin: 0.125rem 0;
+}
+#footer .blocks {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+#footer .blocks.d2 > * {
+  width: calc((100% - 1rem) / 2);
+}
+#footer .blocks.d4 > * {
+  width: calc((100% - 3rem) / 4);
+}
+#footer .banners {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+#footer .banners > * {
+  display: inline-flex;
+  width: 100px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  border: solid 0.1rem var(--dark1);
+  border-radius: 5px;
+}
+#footer .banners a:hover {
+  text-decoration: none;
+}
+#footer .banners img {
+  image-rendering: pixelated;
 }

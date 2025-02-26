@@ -7,6 +7,7 @@ import { parse as parseHTML } from 'node-html-parser';
 const HTML = {
   parse: parseHTML,
 };
+import { minify } from 'html-minifier';
 
 class TemplateEngine {
   #cache = {};
@@ -35,12 +36,53 @@ class TemplateEngine {
   }
 
   use(req, res, next) {
-    res.page = (page, title, scope) => {
-      res.render('index', {
-        client: req.client,
-        page: page,
-        title: title,
-      });
+    res.page = (page, title, scope = {}) => {
+      const data = {};
+      data.client = req.client;
+      data.page = page;
+      data.title = title;
+
+      data.meta = {};
+      data.meta.desc = scope?.meta?.desc;
+      data.meta.keywords = scope?.meta?.keywords;
+      data.meta.author = scope?.meta?.author;
+      data.meta.image = scope?.meta?.image;
+
+      data.meta.og = {};
+      data.meta.og.sitename = scope?.meta?.og?.sitename || '와니네';
+      data.meta.og.title = scope?.meta?.og?.title || title;
+      if (data.meta.og.title) {
+        let titlematch = data.meta.og.title.match(/^(.*) — ([^—]*)$/);
+        if (titlematch) {
+          data.meta.og.sitename = titlematch[2];
+          data.meta.og.title = titlematch[1];
+        }
+      }
+      data.meta.og.desc = scope?.meta?.og?.desc || data.meta.desc;
+      data.meta.og.image = scope?.meta?.og?.image || data.meta.image;
+
+      data.meta.jsonld = scope?.meta?.jsonld;
+
+      for (const key in scope) {
+        if (!data[key]) {
+          data[key] = scope[key];
+        }
+      }
+
+      res.render('index', data);
+    };
+
+    res.error403 = () => {
+      res.status(403).page('error/403', '403 — 와니네');
+    };
+    res.error404 = () => {
+      res.status(404).page('error/404', '404 — 와니네');
+    };
+    res.error418 = () => {
+      res.status(418).page('error/418', '418 — 와니네');
+    };
+    res.error500 = () => {
+      res.status(500).page('error/500', '500 — 와니네');
     };
 
     next();
@@ -62,20 +104,35 @@ class TemplateEngine {
     }*/
   }
 
-  getTemplate(file) {
+  getTemplate(file, prefix = '', suffix = '') {
     const key = Buffer.from(file).toString('base64');
 
     if (!this.#cache[key]) {
-      this.#cache[key] = fs.readFileSync(file).toString();
+      const data = `${prefix}${fs.readFileSync(file).toString()}${suffix}`;
+      const minifiedData = minify(data, {
+        minifyCSS: {
+          level: {
+            2: {
+              all: true,
+              removeUnusedAtRules: false,
+            },
+          },
+        },
+        minifyJS: true,
+        collapseWhitespace: true,
+        collapseInlineTagWhitespace: true,
+        removeComments: true,
+      });
+      this.#cache[key] = minifiedData;
     }
 
     return this.#cache[key];
   }
 
   processDocument(file, document, scope = {}) {
+    this.processIfTag(file, document, scope);
     this.processRepeatTag(file, document, scope);
     this.processInjection(file, document, scope);
-    this.processIfTag(file, document, scope);
     this.processImportTag(file, document, scope);
     this.processUri(file, document, scope);
   }
@@ -105,14 +162,16 @@ class TemplateEngine {
       }
       const importFile = path.resolve(dir, src);
       const ext = importFile.match(/\.([^\.]+)$/)[1];
-      const data = this.getTemplate(importFile);
       let importDocument;
       if (['html', 'htm', 'svg'].includes(ext)) {
+        const data = this.getTemplate(importFile);
         importDocument = HTML.parse(data);
       } else if (['js', 'mjs'].includes(ext)) {
-        importDocument = HTML.parse(`<script>${data}</script>`);
+        const data = this.getTemplate(importFile, '<script>', '</script>');
+        importDocument = HTML.parse(data);
       } else if (['css'].includes(ext)) {
-        importDocument = HTML.parse(`<style>${data}</style>`);
+        const data = this.getTemplate(importFile, '<style>', '</style>');
+        importDocument = HTML.parse(data);
       }
       this.processDocument(importFile, importDocument, scope);
       if (importDocument.childNodes.length === 1) {

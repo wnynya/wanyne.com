@@ -17,7 +17,6 @@
 html {
   font-size: calc(15px + (100vw - 900px) / 400);
   /*font-size: 15px;*/
-  background: #d2b0dd;
 }
 body {
   font-family: var(--font-family);
@@ -25,7 +24,7 @@ body {
   margin: 0;
   padding: 0;
   color: var(--dark1);
-  background: var(--light1);
+  background: var(--th);
   scrollbar-width: 0.5rem;
   scrollbar-color: var(--scrollbar-fg) var(--scrollbar-bg);
   min-height: calc(100vh);
@@ -36,16 +35,18 @@ body {
   print-color-adjust: exact !important;
 }
 #main {
+  background: var(--light1);
   display: block;
-  min-height: calc(100vh);
-  min-height: calc((var(--vh, 1vh) * 100));
+  min-height: calc(100vh + 2rem);
+  min-height: calc((var(--vh, 1vh) * 100) + 2rem);
   overflow-x: hidden;
+  padding-bottom: 2rem;
 }
 #main > section {
   padding: 0 2rem;
 }
 @media (max-width: 600px) {
-  main > section {
+  #main > section {
     padding: 0 1rem;
   }
 }
@@ -60,6 +61,7 @@ a {
   margin: 0;
   font-weight: 400;
   line-height: 100%;
+  color: var(--dark1);
 }
 h1 {
   font-size: 2.25rem;
@@ -70,9 +72,19 @@ h2 {
 h3 {
   font-size: 1.5rem;
 }
-p > a:hover {
+a {
+  text-decoration: none;
+}
+a[href]:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+hr {
+  width: 100%;
+  height: 0;
+  border: none;
+  border-top: solid 0.1rem var(--light5);
+  margin: 0.45rem 0;
 }
 ::-webkit-scrollbar {
   position: fixed;
@@ -111,14 +123,14 @@ p > a:hover {
   width: 100%;
   max-width: var(--wrapper-width);
 }
-.wrapper p {
-  font-size: 1.25rem;
+/*.wrapper p {
+  font-size: 1rem;
   font-weight: 400;
-  line-height: 200%;
+  line-height: 180%;
   text-align: left;
   word-break: keep-all;
   word-wrap: break-word;
-}
+}*/
 .wrapper[sidebar] {
   width: calc(
     min(var(--wrapper-width), 100% - (50% - (50% - var(--sidebar-size))))

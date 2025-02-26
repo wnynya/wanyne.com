@@ -199,4 +199,8 @@
   window.addEventListener('load', () => {
     onScroll();
   });
+
+  window.Nav = {
+    closeDropdown: closeDropdown,
+  };
 })();
