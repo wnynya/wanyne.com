@@ -89,6 +89,8 @@ const Lapisly = new (class {
       _this.display(res.body);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       effector.end();
+
+      window.Cursor ? window.Cursor.lapislyGoto() : null;
     }
     function after(res) {
       result = res;

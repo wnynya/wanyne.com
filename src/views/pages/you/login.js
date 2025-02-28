@@ -1,53 +1,96 @@
 const element = {
-  form: document.querySelector('#auth-login > .wrapper'),
-  front: document.querySelector('#auth-login > .wrapper > .front'),
-  back: document.querySelector('#auth-login > .wrapper > .back'),
+  form: document.querySelector('#form'),
 };
 
 const input = {
-  username: document.querySelector('#input-auth-login-username'),
-  password: document.querySelector('#input-auth-login-password'),
+  username: document.querySelector('#input-username'),
+  password: document.querySelector('#input-password'),
 };
 
 const button = {
-  login: document.querySelector('#button-auth-login'),
-  resetpassword: document.querySelector('#button-auth-reset-password'),
+  login: document.querySelector('#button-login'),
+  resetpassword: document.querySelector('#button-reset-password'),
 };
 
-let runtask = false;
+function flipBack(form) {
+  const front = form.querySelector('.front');
+  const back = form.querySelector('.back');
+  front.style.transform = 'rotateX(-180deg)';
+  back.style.transform = 'rotateX(-360deg)';
+  front.style.transition = 'transform 0.25s linear';
+  back.style.transition = 'transform 0.25s linear';
+  setTimeout(() => {
+    front.style.opacity = 0;
+    back.style.opacity = 1;
+  }, 125);
+  setTimeout(() => {
+    back.style.transition = 'all 0s';
+    back.style.transform = 'rotateX(0deg)';
+  }, 250);
+}
+
+function flipFront(form) {
+  const front = form.querySelector('.front');
+  const back = form.querySelector('.back');
+  front.style.transform = 'rotateX(-360deg)';
+  back.style.transform = 'rotateX(-180deg)';
+  front.style.transition = 'transform 0.25s linear';
+  back.style.transition = 'transform 0.25s linear';
+  setTimeout(() => {
+    front.style.opacity = 1;
+    back.style.opacity = 0;
+  }, 125);
+  setTimeout(() => {
+    front.style.transition = 'all 0s';
+    front.style.transform = 'rotateX(0deg)';
+  }, 250);
+}
+
+function shake(form) {
+  form.setAttribute('shake', '');
+  setTimeout(() => {
+    form.removeAttribute('shake');
+  }, 500);
+}
+
+function goaway(form) {
+  form.setAttribute('goaway', '');
+}
+
+let whileLogin = false;
 async function login() {
-  if (runtask) {
+  if (whileLogin) {
     return;
   }
-  runtask = true;
+  whileLogin = true;
 
   if (!input.username.value) {
     input.username.focus();
-    runtask = false;
+    whileLogin = false;
     return;
   }
 
   if (!input.password.value) {
     input.password.focus();
-    runtask = false;
+    whileLogin = false;
     return;
   }
 
-  flipBack();
+  flipBack(element.form);
 
   await wait(1000);
 
   await task().catch((error) => {
-    flipFront();
+    flipFront(element.form);
     setTimeout(() => {
-      shake();
+      shake(element.form);
       button.resetpassword.removeAttribute('hide');
-      runtask = false;
+      whileLogin = false;
     }, 250);
     throw error;
   });
 
-  goaway();
+  goaway(element.form);
 
   setTimeout(() => {
     const redir = getQuery('redir') || getQuery('r');
@@ -60,51 +103,4 @@ async function task() {
   throw 'a';
 }
 
-function flipBack() {
-  element.front.style.transform = 'rotateX(-180deg)';
-  element.back.style.transform = 'rotateX(-360deg)';
-  element.front.style.transition = 'transform 0.25s linear';
-  element.back.style.transition = 'transform 0.25s linear';
-  setTimeout(() => {
-    element.front.style.opacity = 0;
-    element.back.style.opacity = 1;
-  }, 125);
-  setTimeout(() => {
-    element.back.style.transition = 'all 0s';
-    element.back.style.transform = 'rotateX(0deg)';
-  }, 250);
-}
-
-function flipFront() {
-  element.front.style.transform = 'rotateX(-360deg)';
-  element.back.style.transform = 'rotateX(-180deg)';
-  element.front.style.transition = 'transform 0.25s linear';
-  element.back.style.transition = 'transform 0.25s linear';
-  setTimeout(() => {
-    element.front.style.opacity = 1;
-    element.back.style.opacity = 0;
-  }, 125);
-  setTimeout(() => {
-    element.front.style.transition = 'all 0s';
-    element.front.style.transform = 'rotateX(0deg)';
-  }, 250);
-}
-
-function shake() {
-  element.form.setAttribute('shake', '');
-  setTimeout(() => {
-    element.form.removeAttribute('shake');
-  }, 500);
-}
-
-function goaway() {
-  element.form.setAttribute('goaway', '');
-}
-
 button.login.addEventListener('click', login);
-document.addEventListener('keydown', (event) => {
-  const key = event.key;
-  if (key === 'Enter') {
-    login();
-  }
-});

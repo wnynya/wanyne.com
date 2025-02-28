@@ -8,6 +8,11 @@
 
 */
 
+console.log(
+  '%cwanyne.com — 와니네',
+  'background: #d2b0dd; color: black; font-weight: bold; padding: 1rem; border-radius: 0.75rem;'
+);
+
 window.Math.rem = (n = 1) => {
   return n * parseFloat(getComputedStyle(document.documentElement).fontSize);
 };

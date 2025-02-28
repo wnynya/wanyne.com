@@ -31,13 +31,19 @@
   position: relative;
   bottom: -0.05em;
 }
-[text='hangul'],
-[text='braket'] {
+[text='hangul'] {
   font-family: 'Susa60-Variable', sans-serif;
   font-size: 0.92em;
   vertical-align: baseline;
   position: relative;
   bottom: 0.05em;
+}
+[text='braket'] {
+  font-family: 'Susa60-Variable', sans-serif;
+  font-size: 0.92em;
+  vertical-align: baseline;
+  position: relative;
+  bottom: 0.04em;
 }
 [text='hanja'],
 [text='gana'] {
@@ -54,7 +60,7 @@
   position: relative;
   bottom: -0.05em;
 }
-.material-symbols-outlined {
+span.material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 410, 'GRAD' 0, 'opsz' 24;
   font-size: 1em;
   vertical-align: baseline;

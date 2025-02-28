@@ -1,3 +1,32 @@
-main {
-  height: 5000px;
+#root {
+}
+#root-content {
+  position: relative;
+  pointer-events: all;
+  z-index: 20000;
+}
+
+#root-ballfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10000;
+}
+#root-ballfield .ball {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-radius: 10000px;
+  cursor: grab;
+}
+#root-ballfield .ball.no1 {
+  background-color: var(--th);
+}
+#root-ballfield .ball.no2 {
+  background-color: var(--th);
+}
+#root-ballfield .ball.no3 {
+  background-color: var(--th);
 }

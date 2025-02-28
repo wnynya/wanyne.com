@@ -63,6 +63,10 @@ router.get('/privacy-policy', (req, res) => {
   res.render('pages/privacy-policy');
 });
 
+router.get('/dev', (req, res) => {
+  res.page('dev');
+});
+
 import youRouter from './you.mjs';
 router.use('/u', youRouter);
 

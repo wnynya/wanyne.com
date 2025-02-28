@@ -11,6 +11,7 @@
     <import src="scripts/lapisly.js" type="module"></import>
     <import src="scripts/transform.js" type="module"></import>
     <import src="scripts/mixedtypo.js" type="module"></import>
+    <import src="scripts/cursor.js" type="module"></import>
 
     <meta charset="UTF-8" />
     <meta
@@ -58,6 +59,8 @@
     </if>
   </head>
   <body>
+    <noscript> 자바스크립트 활성화해조 </noscript>
+
     <import src="index.css"></import>
     <import src="index.js" type="module"></import>
 
@@ -101,64 +104,65 @@
     </lapisly>
 
     <footer id="footer">
-      <div class="blocks d4">
-        <div class="b1">
+      <div class="set">
+        <div class="item">
           <p><a href="https://wanyne.com">와니네</a></p>
           <br />
-        </div>
-        <div class="b2"></div>
-        <div class="b3">
-          <p>© 2017 — 2025</p>
+          <p>이 웹사이트는 영원히 개발 중입니다.</p>
           <br />
+          <div class="set">
+            <div class="item">
+              <p>© 2017 — 2025</p>
+            </div>
+            <div class="item">
+              <p>와니</p>
+              <br />
+              <p><a tooltip="✉️" href="mailto:sung@wanyne.com"> 이메일 </a></p>
+              <p>
+                <a
+                  tooltip="💻"
+                  href="https://github.com/wnynya"
+                  target="_blank"
+                >
+                  깃허브
+                </a>
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="b4">
-          <p>와니</p>
+        <div class="item">
           <br />
-          <p><a tooltip="✉️" href="mailto:sung@wanyne.com"> 이메일 </a></p>
-          <p>
-            <a tooltip="💻" href="https://github.com/wnynya" target="_blank">
-              깃허브
-            </a>
-          </p>
-        </div>
-      </div>
-      <br />
-      <div class="blocks d2">
-        <div class="b1">
+          <br />
+          <br />
+          <br />
           <p><a href="/terms-of-use" target="_blank"> 이용약관 </a></p>
           <p>
             <a href="/privacy-policy" target="_blank"> 개인정보처리방침 </a>
           </p>
-        </div>
-        <div class="b2">
           <br />
-          <p>이 웹사이트는 영원히 개발 중입니다.</p>
+          <p>배너들</p>
+          <br />
+          <div class="banners">
+            <a href="https://wanyne.com" target="_blank" rel="nofollow">
+              <img src="/resources/images/banners/wanyne-banner.gif" />
+            </a>
+            <a href="https://amuject.com" target="_blank" rel="nofollow">
+              <img src="/resources/images/banners/amuject-banner.gif" />
+            </a>
+            <a>
+              <img src="/resources/images/banners/csf-banner.gif" />
+            </a>
+            <a href="http://u-miniple.com/" target="_blank" rel="nofollow">
+              <img
+                src="https://blog.kakaocdn.net/dn/d0MYPA/btsIbuLPkFm/Mw0Z2Xpyf5SzQGZeXDi8h0/img.gif"
+                alt="미니플동맹 배너"
+              />
+            </a>
+            <a>
+              <img src="/resources/images/banners/csf-banner.gif" />
+            </a>
+          </div>
         </div>
-      </div>
-      <br />
-      <hr />
-      <br />
-      <p>배너들</p>
-      <br />
-      <div class="banners">
-        <a href="https://wanyne.com" target="_blank" rel="nofollow">
-          <img src="/resources/banners/wanyne-banner.gif" />
-        </a>
-        <a href="https://amuject.com" target="_blank" rel="nofollow">
-          <img src="/resources/banners/amuject-banner.gif" />
-        </a>
-        <a>
-          <img src="/resources/banners/csf-banner.gif" />
-        </a>
-        <a href="http://u-miniple.com/" target="_blank" rel="nofollow">
-          <img
-            src="https://blog.kakaocdn.net/dn/d0MYPA/btsIbuLPkFm/Mw0Z2Xpyf5SzQGZeXDi8h0/img.gif"
-            alt="미니플동맹 배너"
-          />
-        </a>
-        <a>
-          <img src="/resources/banners/csf-banner.gif" />
-        </a>
       </div>
     </footer>
   </body>

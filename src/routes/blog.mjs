@@ -4,7 +4,7 @@ import express from 'express';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.page('root', '와니네');
+  res.page('blog/index', '게시글 목록 — 와니네');
 });
 
 export default router;

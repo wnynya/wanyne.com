@@ -123,7 +123,7 @@ class TemplateEngine {
         collapseInlineTagWhitespace: true,
         removeComments: true,
       });
-      this.#cache[key] = minifiedData;
+      this.#cache[key] = data;
     }
 
     return this.#cache[key];
