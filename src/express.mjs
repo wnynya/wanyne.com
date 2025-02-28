@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 
 import config from './config.mjs';
 import middlewares from './modules/middlewares/index.mjs';
-import TemplateEngine from './modules/engine.mjs';
+import engine from './modules/engine.mjs';
 
 const app = express();
 
@@ -22,14 +22,8 @@ app.use(express.static(path.resolve(__dirname, './public')));
 app.use(middlewares.cookies());
 /* 클라이언트 분석기 설정 */
 app.use(middlewares.client());
-/* 렌더링 엔진 설정 */
-const engine = new TemplateEngine({
-  views: path.resolve(__dirname, './views'),
-});
-app.engine('html', engine.render.bind(engine));
-app.set('view engine', 'html');
-app.set('views', engine.views);
-app.use(engine.use.bind(engine));
+/* 엔진 설정 */
+engine(app, path.resolve(__dirname, './views'));
 
 /* 루트 라우터 불러오기 */
 import router from './routes/root.mjs';

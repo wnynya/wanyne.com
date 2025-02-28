@@ -14,11 +14,15 @@ class TemplateEngine {
   options;
   templates;
 
-  constructor(options) {
-    this.views = options.views;
-    this.options = options;
+  constructor(app, views) {
+    this.views = views;
     this.templates = {};
     this.resources = {};
+
+    app.engine('html', this.render.bind(this));
+    app.set('view engine', 'html');
+    app.set('views', this.views);
+    app.use(this.use.bind(this));
   }
 
   render(file, scope, callback) {
@@ -85,9 +89,7 @@ class TemplateEngine {
       res.status(500).page('error/500', '500 — 와니네');
     };
 
-    next();
-
-    /*try {
+    try {
       const file = path.resolve(this.views, req.path.substring(1));
 
       if (!file.startsWith(this.views)) {
@@ -101,7 +103,7 @@ class TemplateEngine {
       res.sendFile(file);
     } catch (e) {
       next();
-    }*/
+    }
   }
 
   getTemplate(file, prefix = '', suffix = '') {
@@ -291,4 +293,6 @@ class TemplateEngine {
   }
 }
 
-export default TemplateEngine;
+export default (app, views) => {
+  return new TemplateEngine(app, views);
+};

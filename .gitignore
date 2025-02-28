@@ -5,4 +5,4 @@ node_modules/
 
 /secrets
 /config
-/src/public/resources/fonts
+/src/views/resources/fonts
