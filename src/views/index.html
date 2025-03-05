@@ -7,11 +7,6 @@
     <import src="styles/layout.css"></import>
     <import src="styles/animations.css"></import>
 
-    <import src="resources/fonts/OnulSusa60/OnulSusa60.css"></import>
-    <import src="resources/fonts/SuisseIntl/SuisseIntl.css"></import>
-    <import src="resources/fonts/Pretendard/Pretendard.css"></import>
-    <import src="resources/fonts/Pretendard/PretendardJP.css"></import>
-
     <import src="scripts/injections.js" type="module"></import>
     <import src="scripts/lapisly.js" type="module"></import>
     <import src="scripts/transform.js" type="module"></import>
@@ -91,9 +86,29 @@
           </a>
         </div>
         <div class="right">
-          <a id="button-nav-login" href="/u/login" type="button" primary>
-            로그인 🔐
-          </a>
+          <if condition="false">
+            <div id="nav-account" class="account">
+              <button id="button-nav-account" class="title">
+                <span class="name">와니 🥺</span>
+                <span class="image"></span>
+              </button>
+              <div class="content">
+                <a type="button" class="el" href="/u/profile" invisible
+                  >내 프로젝트</a
+                >
+                <a type="button" class="el" href="/u/profile" invisible>설정</a>
+                <button id="button-nav-logout" class="el" invisible>
+                  로그아웃
+                </button>
+              </div>
+            </div>
+            <section id="nav-account-cover"></section>
+          </if>
+          <else>
+            <a id="button-nav-login" href="/u/login" type="button" primary>
+              로그인 🔐
+            </a>
+          </else>
         </div>
       </section>
       <section id="nav-drawer"></section>

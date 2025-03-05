@@ -1,14 +1,20 @@
 (() => {
+  window.Nav = {};
+
   const element = {
     nav: document.querySelector('#nav'),
     always: document.querySelector('#nav-always'),
     drawer: document.querySelector('#nav-drawer'),
     dropdown: document.querySelector('#nav-dropdown'),
     cover: document.querySelector('#nav-cover'),
+    account: document.querySelector('#nav-account'),
+    accountCover: document.querySelector('#nav-account-cover'),
   };
 
   const button = {
     index: document.querySelector('#button-nav-index'),
+    account: document.querySelector('#button-nav-account'),
+    logout: document.querySelector('#button-nav-logout'),
   };
 
   let dropdownHeight = 12 + 2;
@@ -141,7 +147,7 @@
     element.dropdown.style.pointerEvents = '';
     meltCover();
   }
-
+  window.Nav.closeDropdown = closeDropdown;
   button.index.addEventListener('click', () => {
     if (!button.index.hasAttribute('selected')) {
       openDropdown();
@@ -149,6 +155,83 @@
       closeDropdown();
     }
   });
+
+  if (element.account) {
+    let accountState = 'close';
+    let lastClosedAccountWidth = 0;
+    function openAccount() {
+      const content = element.account.querySelector('.content');
+      if (accountState === 'open') {
+        return;
+      }
+      accountState = 'open';
+
+      lastClosedAccountWidth = element.account.offsetWidth / Math.rem(1);
+      let items = element.account.querySelectorAll(`.content > *`).length;
+
+      element.account.setAttribute('open', '');
+      element.account.transform().spring().to({
+        width: `16rem`,
+      });
+      content
+        .transform()
+        .spring()
+        .to({
+          height: `${items * 2.25}rem`,
+        });
+      freezeAccountCover();
+    }
+
+    function closeAccount() {
+      const content = element.account.querySelector('.content');
+      if (accountState === 'close') {
+        return;
+      }
+      accountState = 'close';
+
+      element.account.removeAttribute('open');
+      element.account
+        .transform()
+        .spring(0.3, 12)
+        .to({
+          width: `${lastClosedAccountWidth}rem`,
+        });
+      content.transform().easein().to(
+        {
+          height: `0rem`,
+        },
+        100
+      );
+      meltAccountCover();
+    }
+    window.Nav.closeAccount = closeAccount;
+
+    button.account.addEventListener('click', () => {
+      if (accountState === 'close') {
+        openAccount();
+      } else {
+        closeAccount();
+      }
+    });
+
+    function freezeAccountCover() {
+      element.accountCover.setAttribute('freeze', '');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function meltAccountCover() {
+      element.accountCover.removeAttribute('freeze');
+      document.body.style.overflow = '';
+      closeAccount();
+    }
+
+    element.accountCover.addEventListener('click', meltAccountCover);
+
+    function logout() {
+      window.location.reload();
+    }
+    button.logout.addEventListener('click', logout);
+  }
 
   let lastScrollY = Infinity;
   let upDirStart = 1;
@@ -199,8 +282,4 @@
   window.addEventListener('load', () => {
     onScroll();
   });
-
-  window.Nav = {
-    closeDropdown: closeDropdown,
-  };
 })();

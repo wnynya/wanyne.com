@@ -81,9 +81,10 @@
 }
 #nav-always > .right {
   justify-content: flex-end;
+  position: relative;
 }
-#nav-always > .right > button,
-#nav-always > .right > [type='button'] {
+#nav-always > .right > [type='button'],
+#nav-account > button {
   --button-bg: var(--dark3);
   --button-fg: var(--light1);
   --button-ol: var(--dark3);
@@ -92,10 +93,82 @@
   --button-hover-fg: var(--white);
   --button-hover-ol: var(--dark1);
 
-  border-radius: 10rem 10rem;
+  border-radius: 1.125rem 1.125rem;
   padding: 0 1rem;
 }
+#nav-account {
+  position: absolute;
+  top: 0.875rem;
+  border-radius: 1.125rem 1.125rem;
+  background: var(--dark3);
+  padding: 0rem;
+  transition: border-radius 0.1s ease-out, padding 0.1s ease-out;
+  z-index: 190000;
+}
+#nav-account > .title {
+  display: block;
+  position: relative;
+  width: 100%;
+  text-align: left;
+  transition: border-radius 0.2s ease-out;
+}
+#nav-account > .title > .name {
+  display: inline-block;
+  max-width: 8rem;
+  overflow: hidden;
+  word-wrap: break-word;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#nav-account > .title > .image {
+  display: inline-block;
+  position: absolute;
+  top: 0.275rem;
+  right: 0.275rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: var(--gray3);
+  border-radius: 2rem 2rem;
+  overflow: hidden;
+}
+#nav-account > .content {
+  height: 0;
+  overflow: hidden;
+}
+#nav-account > .content > * {
+  width: 100%;
+  text-align: left;
+  display: block;
+  --button-bg: var(--dark3);
+  --button-fg: var(--light1);
+  --button-ol: var(--dark3);
 
+  --button-hover-bg: var(--dark1);
+  --button-hover-fg: var(--white);
+  --button-hover-ol: var(--dark1);
+  transition: border-radius 0.2s ease-out;
+}
+#nav-account[open] {
+  border-radius: 1.625rem;
+  padding: 0.5rem;
+}
+#nav-account[open] > .title {
+  border-bottom-left-radius: 0.625rem;
+  border-bottom-right-radius: 0.625rem;
+}
+#nav-account[open] > .title > .name {
+  max-width: 100%;
+}
+#nav-account[open] > .content > *:last-child {
+  border-bottom-left-radius: 1.125rem;
+  border-bottom-right-radius: 1.125rem;
+}
+#nav-account[open] > .content hr {
+  margin: 0;
+  width: calc(100% - 1.25rem);
+  margin-left: 0.625rem;
+  margin-top: -0.1rem;
+}
 #nav-drawer {
   position: absolute;
   top: 0rem;
@@ -111,7 +184,6 @@
 #nav-drawer[state='open'] {
   top: -2rem;
 }
-
 #nav-dropdown {
   position: absolute;
   top: 4rem;
@@ -127,8 +199,9 @@
   height: 2rem;
 }
 
-#nav-cover {
-  position: absolute;
+#nav-cover,
+#nav-account-cover {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -139,10 +212,14 @@
   opacity: 0;
   transition: opacity 0.2s ease-in;
 }
-#nav-cover[freeze] {
+#nav-cover[freeze],
+#nav-account-cover[freeze] {
   opacity: 1;
   pointer-events: all;
   transition: opacity 0.2s ease-out;
+}
+#nav-account-cover {
+  z-index: 130000;
 }
 
 @media (max-width: 900px) {

@@ -67,7 +67,8 @@ const Lapisly = new (class {
     }
 
     window.asyncs ? window.asyncs.clear() : null;
-    window.Nav ? window.Nav.closeDropdown() : null;
+    window.Nav?.closeDropdown ? window.Nav.closeDropdown() : null;
+    window.Nav?.closeAccount ? window.Nav.closeAccount() : null;
 
     let effector = new Curtain();
     let result = null;
