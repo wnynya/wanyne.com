@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 import config from './config.mjs';
-import middlewares from './modules/middlewares/index.mjs';
+import middlewares from '@wanyne/express-middlewares';
 import engine from './modules/engine.mjs';
 
 const app = express();
@@ -26,7 +26,7 @@ app.use(middlewares.client());
 engine(app, path.resolve(__dirname, './views'));
 
 /* 루트 라우터 불러오기 */
-import router from './routes/root.mjs';
+import router from './routes/index.mjs';
 app.use('/', router);
 
 /* 404 처리 */

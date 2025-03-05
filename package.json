@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "main": "src/app.mjs",
   "scripts": {
-    "start": "node src/app.mjs -p 80",
-    "dev": "nodemon src/app.mjs -p 80"
+    "start": "node src/app.mjs -p 29080",
+    "dev": "nodemon src/app.mjs -p 29080"
   },
   "author": "Wany (Sungwan Jo)",
   "license": "",
   "description": "",
   "dependencies": {
+    "@wanyne/express-middlewares": "^0.1.1",
     "express": "^4.21.2",
     "html-minifier": "^4.0.0",
     "node-html-parser": "^7.0.1"
